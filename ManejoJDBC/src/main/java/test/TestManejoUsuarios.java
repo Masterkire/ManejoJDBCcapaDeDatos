@@ -1,13 +1,12 @@
 package test;
 
 import datos.Conexion;
+import datos.IUsuarioDao;
 import datos.UsuarioDAO;
-import domain.Usuario;
+import domain.UsuarioDTO;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TestManejoUsuarios {
     public static void main(String[] args) {
@@ -20,7 +19,7 @@ public class TestManejoUsuarios {
                 conexion.setAutoCommit(false);
             }
             
-            UsuarioDAO usuarioDao = new UsuarioDAO();
+            IUsuarioDao usuarioDao = new UsuarioDAO();
             
         //Insertando un nuevo objeto de tipo usuario
 //        Usuario nuevoUsuario = new Usuario("Berrys", "bbpichon");
@@ -31,11 +30,11 @@ public class TestManejoUsuarios {
 //        int usuariosModificados = usuarioDao.actualizar(usuarioModificado);
 
         //Eliminar usuarios
-        Usuario usuarioEliminado = new Usuario(4);
-        int usuariosEliminados = usuarioDao.eliminar(usuarioEliminado);
+//        UsuarioDTO usuarioEliminado = new UsuarioDTO(4);
+//        int usuariosEliminados = usuarioDao.eliminar(usuarioEliminado);
         
         //Listar registro en pantalla de usuarios
-        List<Usuario> usuarios = usuarioDao.seleccionar();
+        List<UsuarioDTO> usuarios = usuarioDao.seleccionar();
         
         usuarios.forEach(usuario -> {
             System.out.println("Usuario: " + usuario);

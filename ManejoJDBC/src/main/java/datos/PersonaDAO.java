@@ -16,7 +16,6 @@ public class PersonaDAO implements IPersonaDao{
     private static final String SQL_DELETE = "DELETE FROM persona WHERE id_persona = ?";
     
     public PersonaDAO(){
-        
     }
     
     public PersonaDAO(Connection conexionTransaccional){

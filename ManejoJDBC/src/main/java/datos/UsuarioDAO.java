@@ -1,12 +1,12 @@
 package datos;
 
 import static datos.Conexion.*;
-import domain.Usuario;
+import domain.UsuarioDTO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UsuarioDAO {
+public class UsuarioDAO implements IUsuarioDao{
     
     private Connection conexionTransaccional;
     
@@ -22,12 +22,12 @@ public class UsuarioDAO {
         this.conexionTransaccional = conexionTransaccional;
     }
     
-    public List<Usuario> seleccionar() throws SQLException{
+    public List<UsuarioDTO> seleccionar() throws SQLException{
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Usuario usuario = null;
-        List<Usuario> usuarios = new ArrayList<>();
+        UsuarioDTO usuario = null;
+        List<UsuarioDTO> usuarios = new ArrayList<>();
         
         try {
             conn = this.conexionTransaccional != null ? this.conexionTransaccional : getConnection();
@@ -38,7 +38,7 @@ public class UsuarioDAO {
                 String nomUsuario = rs.getString("usuario");
                 String contrasenia = rs.getString("password");
                 
-                usuario = new Usuario(idUsuario, nomUsuario, contrasenia);
+                usuario = new UsuarioDTO(idUsuario, nomUsuario, contrasenia);
                 usuarios.add(usuario);
             }
         } finally {
@@ -56,7 +56,7 @@ public class UsuarioDAO {
         return usuarios;
     }
     
-    public int insertar(Usuario usuario) throws SQLException{
+    public int insertar(UsuarioDTO usuario) throws SQLException{
         Connection conn = null;
         PreparedStatement stmt = null;
         int registros = 0;
@@ -79,7 +79,7 @@ public class UsuarioDAO {
         return registros;
     }
     
-    public int actualizar(Usuario usuario) throws SQLException{
+    public int actualizar(UsuarioDTO usuario) throws SQLException{
         Connection conn = null;
         PreparedStatement stmt = null;
         int registros = 0;
@@ -103,7 +103,7 @@ public class UsuarioDAO {
         return registros;
     }
     
-    public int eliminar(Usuario usuario) throws SQLException{
+    public int eliminar(UsuarioDTO usuario) throws SQLException{
         Connection conn = null;
         PreparedStatement stmt = null;
         int registros = 0;
