@@ -1,12 +1,12 @@
 package datos;
 
 import static datos.Conexion.*;
-import domain.Persona;
+import domain.PersonaDTO;
 import java.sql.*;
 import java.sql.PreparedStatement;
 import java.util.*;
 
-public class PersonaDAO {
+public class PersonaDAO implements IPersonaDao{
     
     private Connection conexionTransaccional;
     
@@ -23,12 +23,12 @@ public class PersonaDAO {
         this.conexionTransaccional = conexionTransaccional;
     }
     
-    public List<Persona> seleccionar() throws SQLException{
+    public List<PersonaDTO> seleccionar() throws SQLException{
         Connection conn = null;
         PreparedStatement stmt = null;
         ResultSet rs = null;
-        Persona persona = null;
-        List<Persona> personas = new ArrayList<>();
+        PersonaDTO persona = null;
+        List<PersonaDTO> personas = new ArrayList<>();
         
         try {
             conn = this.conexionTransaccional != null ? this.conexionTransaccional : getConnection();
@@ -41,7 +41,7 @@ public class PersonaDAO {
                 String email = rs.getString("email");
                 String telefono = rs.getString("telefono");
                 
-                persona = new Persona(idPersona, nombre, apellido, email, telefono);
+                persona = new PersonaDTO(idPersona, nombre, apellido, email, telefono);
                 
                 personas.add(persona);
             }
@@ -60,7 +60,7 @@ public class PersonaDAO {
         return personas;
     }
     
-    public int insertar(Persona persona) throws SQLException{
+    public int insertar(PersonaDTO persona) throws SQLException{
         Connection conn = null;
         PreparedStatement stmt = null;
         int registros = 0;
@@ -88,7 +88,7 @@ public class PersonaDAO {
         return registros;
     }
     
-    public int actualizar(Persona persona) throws SQLException{
+    public int actualizar(PersonaDTO persona) throws SQLException{
         Connection conn = null;
         PreparedStatement stmt = null;
         int registros = 0;
@@ -117,7 +117,7 @@ public class PersonaDAO {
         return registros;
     }
     
-    public int eliminar(Persona persona) throws SQLException{
+    public int eliminar(PersonaDTO persona) throws SQLException{
         Connection conn = null;
         PreparedStatement stmt = null;
         int registros = 0;

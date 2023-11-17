@@ -1,8 +1,9 @@
 package test;
 
 import datos.Conexion;
+import datos.IPersonaDao;
 import datos.PersonaDAO;
-import domain.Persona;
+import domain.PersonaDTO;
 import java.sql.*;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class TestManejoPersonas {
                 conexion.setAutoCommit(false);
             }
             
-            PersonaDAO personaDao = new PersonaDAO(conexion);
+            IPersonaDao personaDao = new PersonaDAO(conexion);
 //            Persona personaModificada = new Persona();
 //            personaModificada.setIdPersona(2);
 //            personaModificada.setNombre("Karla Ivonne");
@@ -36,7 +37,7 @@ public class TestManejoPersonas {
 //            System.out.println("Se ha echo commit de la transaccion");
             
             //Listar registro en pantalla de personas
-            List<Persona> personas = personaDao.seleccionar();
+            List<PersonaDTO> personas = personaDao.seleccionar();
         
             personas.forEach(persona -> {
                 System.out.println("Persona: " + persona);
